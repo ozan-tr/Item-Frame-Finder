@@ -1,0 +1,46 @@
+{
+	"schemaVersion": 1,
+	"id": "item-frame-finder",
+	"version": "0.0.1",
+	"name": "Item Frame Finder",
+	"description": "A mod for those who get lost in their storage systems.",
+	"authors": [
+		"OzanG"
+	],
+	"contact": {
+		"homepage": "https://fabricmc.net/",
+		"sources": "https://github.com/FabricMC/fabric-example-mod"
+	},
+	"license": "CC0-1.0",
+	"icon": "assets/item-frame-finder/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"client": [
+			"ozang.itemframefinder.ItemFrameFinderClient"
+		],
+		"main": [
+			"ozang.itemframefinder.ItemFrameFinder"
+		],
+		"modmenu": [
+			"ozang.itemframefinder.ModMenuIntegration"
+		]
+	},
+	"mixins": [
+		"item-frame-finder.mixins.json",
+		{
+			"config": "item-frame-finder.client.mixins.json",
+			"environment": "client"
+		}
+	],
+	"depends": {
+		"fabricloader": ">=0.15.7",
+		"minecraft": "~1.20.4",
+		"java": ">=17",
+		"fabric-api": "*",
+		"fabric-key-binding-api-v1": "*",
+		"cloth-config": "*"
+	},
+	"suggests": {
+		"modmenu": "*"
+	}
+}
