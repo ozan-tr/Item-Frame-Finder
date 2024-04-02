@@ -8,10 +8,12 @@
     "text.autoconfig.item-frame-finder.option.Preset": "",
     "text.autoconfig.item-frame-finder.option.Preset.name": "Name",
     "text.autoconfig.item-frame-finder.option.Preset.items": "Items",
+    "text.autoconfig.item-frame-finder.option.frameType": "Item Frame Type",
 
     "key.item-frame-finder.toggle": "Toggle Item Frame Finder",
     "category.item-frame-finder.bind": "Item Frame Finder",
 
     "text.autoconfig.item-frame-finder.title": "Item Frame Finder"
+    
 
 }

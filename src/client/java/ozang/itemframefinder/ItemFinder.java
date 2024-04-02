@@ -2,6 +2,8 @@ package ozang.itemframefinder;
 
 import net.minecraft.entity.EntityType;
 
+import java.lang.reflect.Array;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 
@@ -10,6 +12,7 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.decoration.GlowItemFrameEntity;
+import net.minecraft.entity.decoration.ItemFrameEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -27,12 +30,21 @@ public class ItemFinder {
 
     public static void FindMatchingFrames(PlayerEntity player) {
         ItemFrameFinderConfig config = AutoConfig.getConfigHolder(ItemFrameFinderConfig.class).getConfig();
-        List<GlowItemFrameEntity> itemFrames = clientWorld.getEntitiesByType(EntityType.GLOW_ITEM_FRAME, player.getBoundingBox().expand(config.searchDistance, 50.0D, config.searchDistance), EntityPredicates.VALID_ENTITY);
+
+        List<ItemFrameEntity> itemFrames = clientWorld.getEntitiesByType(EntityType.ITEM_FRAME, player.getBoundingBox().expand(config.searchDistance, 50.0D, config.searchDistance), EntityPredicates.VALID_ENTITY);
+
+        if(config.frameType == ItemFrameFinderConfig.FRAME_TYPES.GLOW){
+            itemFrames.clear();
+            List<GlowItemFrameEntity> glowItemFrames = clientWorld.getEntitiesByType(EntityType.GLOW_ITEM_FRAME, player.getBoundingBox().expand(config.searchDistance, 50.0D, config.searchDistance), EntityPredicates.VALID_ENTITY);
+            itemFrames.addAll(glowItemFrames);
+        }else if(config.frameType == ItemFrameFinderConfig.FRAME_TYPES.BOTH){
+            itemFrames.addAll(clientWorld.getEntitiesByType(EntityType.GLOW_ITEM_FRAME, player.getBoundingBox().expand(config.searchDistance, 50.0D, config.searchDistance), EntityPredicates.VALID_ENTITY));
+        }
 
         int foundFrameCount = 0;
 
         for (Entity entity : itemFrames) {
-            GlowItemFrameEntity itemFrame = (GlowItemFrameEntity) entity;
+            ItemFrameEntity itemFrame = (ItemFrameEntity) entity;
             ItemStack itemStack = itemFrame.getHeldItemStack();
             if(searchItems.contains(itemStack.getItem())){
                 foundFrameCount++;

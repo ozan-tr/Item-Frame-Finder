@@ -23,9 +23,18 @@ public class ItemFrameFinderConfig implements ConfigData {
     @ConfigEntry.Gui.EnumHandler(option = ConfigEntry.Gui.EnumHandler.EnumDisplayOption.BUTTON)
     public RENDER_MODE renderMode = RENDER_MODE.EDGES;
 
+    @ConfigEntry.Gui.EnumHandler(option = ConfigEntry.Gui.EnumHandler.EnumDisplayOption.BUTTON)
+    public FRAME_TYPES frameType = FRAME_TYPES.NORMAL;
+
     enum RENDER_MODE {
         EDGES,
         FACES
+    }
+
+    enum FRAME_TYPES {
+        NORMAL,
+        GLOW,
+        BOTH
     }
 
 
